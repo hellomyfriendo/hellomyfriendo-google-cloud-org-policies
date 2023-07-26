@@ -50,22 +50,6 @@ resource "google_org_policy_policy" "cloudfunctions_allowedIngressSettings" {
   }
 }
 
-resource "google_org_policy_policy" "cloudfunctions_allowedVpcConnectorEgressSettings" {
-  provider = google.org-policy-admin
-  name     = "${local.org_policy_name_prefix}/cloudfunctions.allowedVpcConnectorEgressSettings"
-  parent   = local.org_policy_parent
-
-  spec {
-    rules {
-      values {
-        allowed_values = [
-          "PRIVATE_RANGES_ONLY",
-        ]
-      }
-    }
-  }
-}
-
 resource "google_org_policy_policy" "compute_disableGlobalLoadBalancing" {
   provider = google.org-policy-admin
   name     = "${local.org_policy_name_prefix}/compute.disableGlobalLoadBalancing"
@@ -303,22 +287,6 @@ resource "google_org_policy_policy" "iam_disableServiceAccountKeyUpload" {
   spec {
     rules {
       enforce = "TRUE"
-    }
-  }
-}
-
-resource "google_org_policy_policy" "run_allowedVPCEgress" {
-  provider = google.org-policy-admin
-  name     = "${local.org_policy_name_prefix}/run.allowedVPCEgress"
-  parent   = local.org_policy_parent
-
-  spec {
-    rules {
-      values {
-        allowed_values = [
-          "private-ranges-only",
-        ]
-      }
     }
   }
 }
