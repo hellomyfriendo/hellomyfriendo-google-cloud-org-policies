@@ -50,18 +50,6 @@ resource "google_org_policy_policy" "cloudfunctions_allowedIngressSettings" {
   }
 }
 
-resource "google_org_policy_policy" "compute_disableGlobalLoadBalancing" {
-  provider = google.org-policy-admin
-  name     = "${local.org_policy_name_prefix}/compute.disableGlobalLoadBalancing"
-  parent   = local.org_policy_parent
-
-  spec {
-    rules {
-      enforce = "TRUE"
-    }
-  }
-}
-
 resource "google_org_policy_policy" "compute_disableGlobalSelfManagedSslCertificate" {
   provider = google.org-policy-admin
   name     = "${local.org_policy_name_prefix}/compute.disableGlobalSelfManagedSslCertificate"
