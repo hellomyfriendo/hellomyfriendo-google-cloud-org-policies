@@ -62,6 +62,18 @@ resource "google_org_policy_policy" "compute_disableGlobalSelfManagedSslCertific
   }
 }
 
+resource "google_org_policy_policy" "commerceorggovernance_disablePublicMarketplace" {
+  provider = google.org-policy-admin
+  name     = "${local.org_policy_name_prefix}/commerceorggovernance.disablePublicMarketplace"
+  parent   = local.org_policy_parent
+
+  spec {
+    rules {
+      enforce = "TRUE"
+    }
+  }
+}
+
 resource "google_org_policy_policy" "compute_disableGuestAttributesAccess" {
   provider = google.org-policy-admin
   name     = "${local.org_policy_name_prefix}/compute.disableGuestAttributesAccess"
