@@ -22,6 +22,18 @@ data "google_service_account_access_token" "default" {
   lifetime               = "300s"
 }
 
+resource "google_org_policy_policy" "ainotebooks_restrictPublicIp" {
+  provider = google.org-policy-admin
+  name     = "${local.org_policy_name_prefix}/ainotebooks.restrictPublicIp"
+  parent   = local.org_policy_parent
+
+  spec {
+    rules {
+      enforce = "TRUE"
+    }
+  }
+}
+
 resource "google_org_policy_policy" "appengine_disableCodeDownload" {
   provider = google.org-policy-admin
   name     = "${local.org_policy_name_prefix}/appengine.disableCodeDownload"
