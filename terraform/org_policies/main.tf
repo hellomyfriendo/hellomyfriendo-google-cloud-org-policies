@@ -255,6 +255,20 @@ resource "google_org_policy_policy" "gcp_restrictTLSVersion" {
   }
 }
 
+resource "google_org_policy_policy" "iam_allowedPolicyMemberDomains" {
+  provider = google.org-policy-admin
+  name     = "${local.org_policy_name_prefix}/iam.allowedPolicyMemberDomains"
+  parent   = local.org_policy_parent
+
+  spec {
+    rules {
+      values {
+        allowed_values = var.allowed_policy_member_domains
+      }
+    }
+  }
+}
+
 resource "google_org_policy_policy" "iam_automaticIamGrantsForDefaultServiceAccounts" {
   provider = google.org-policy-admin
   name     = "${local.org_policy_name_prefix}/iam.automaticIamGrantsForDefaultServiceAccounts"
