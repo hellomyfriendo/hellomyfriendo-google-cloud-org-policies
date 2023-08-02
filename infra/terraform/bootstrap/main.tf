@@ -1,3 +1,13 @@
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
+
+provider "google-beta" {
+  project = var.project_id
+  region  = var.region
+}
+
 module "project" {
   source = "./modules/project"
 
@@ -9,7 +19,6 @@ module "apps" {
   source = "./modules/apps"
 
   org_id                        = var.org_id
-  project_id                    = var.project_id
   region                        = var.region
   allowed_policy_member_domains = var.allowed_policy_member_domains
   sourcerepo_name               = var.sourcerepo_name
@@ -19,7 +28,6 @@ module "apps" {
 
 # tfvars secret
 resource "google_secret_manager_secret" "tfvars" {
-  project   = module.project.project_id
   secret_id = "terraform-tfvars-bootstrap"
 
   replication {

@@ -7,7 +7,6 @@ locals {
 }
 
 data "google_project" "project" {
-  project_id = var.project_id
 }
 
 resource "google_organization_iam_member" "cloudbuild_sa" {
@@ -18,8 +17,7 @@ resource "google_organization_iam_member" "cloudbuild_sa" {
 }
 
 resource "google_cloudbuild_trigger" "apps" {
-  project = var.project_id
-  name    = "apps"
+  name = "apps"
 
   description = "Build and deploy the apps"
 
