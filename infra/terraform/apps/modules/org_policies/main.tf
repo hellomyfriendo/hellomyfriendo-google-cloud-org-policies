@@ -211,37 +211,9 @@ resource "google_org_policy_policy" "gcp_restrictNonCmekServices" {
     rules {
       values {
         denied_values = [
-          "aiplatform.googleapis.com",
-          "artifactregistry.googleapis.com",
           "bigquery.googleapis.com",
-          "bigtable.googleapis.com",
-          "cloudfunctions.googleapis.com",
-          "composer.googleapis.com",
-          "compute.googleapis.com",
-          "container.googleapis.com",
-          "dataflow.googleapis.com",
           "dataproc.googleapis.com",
-          "documentai.googleapis.com",
-          "logging.googleapis.com",
-          "pubsub.googleapis.com",
-          "run.googleapis.com",
-          "secretmanager.googleapis.com",
-          "spanner.googleapis.com",
-          "sqladmin.googleapis.com",
-          "storage.googleapis.com",
         ]
-      }
-    }
-
-    rules {
-      values {
-        allowed_values = [
-          "storage.googleapis.com",
-        ]
-      }
-
-      condition {
-        expression = "resource.matchTag('projects', '${var.project_id}')"
       }
     }
   }
