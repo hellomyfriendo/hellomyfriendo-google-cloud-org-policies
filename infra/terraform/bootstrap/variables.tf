@@ -3,9 +3,9 @@ variable "org_id" {
   description = " The numeric ID of the organization."
 }
 
-variable "bootstrap_project_id" {
+variable "project_id" {
   type        = string
-  description = "The bootstrap project ID."
+  description = "The project ID."
 }
 
 variable "region" {
@@ -18,7 +18,12 @@ variable "allowed_policy_member_domains" {
   description = "One or more Cloud Identity or Google Workspace customer IDs whose principals can be added to IAM policies."
 }
 
-variable "org_policy_admin_sa_email" {
+variable "sourcerepo_name" {
   type        = string
-  description = "The Organization Policy Admin service account email."
+  description = "The Cloud Source Repository name."
+}
+
+variable "branch_name" {
+  type        = string
+  description = "The Cloud Source repository branch name."
 }
