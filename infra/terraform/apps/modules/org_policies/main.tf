@@ -4,6 +4,16 @@ locals {
   org_policy_parent = "organizations/${var.org_id}"
 }
 
+data "google_tags_tag_key" "all_users_ingress" {
+  parent     = "organizations/${var.org_id}"
+  short_name = var.all_users_ingress_tag_key
+}
+
+data "google_tags_tag_value" "all_users_ingress" {
+  parent     = data.google_tags_tag_key.all_users_ingress.id
+  short_name = var.all_users_ingress_tag_value
+}
+
 resource "google_org_policy_policy" "ainotebooks_restrictPublicIp" {
   name   = "${local.org_policy_name_prefix}/ainotebooks.restrictPublicIp"
   parent = local.org_policy_parent
@@ -259,6 +269,16 @@ resource "google_org_policy_policy" "iam_allowedPolicyMemberDomains" {
     rules {
       values {
         allowed_values = var.allowed_policy_member_domains
+      }
+    }
+
+    rules {
+      allow_all = "TRUE"
+
+      condition {
+        title       = "Allow ${var.all_users_ingress_tag_key} ${var.all_users_ingress_tag_value} tag"
+        description = "See https://cloud.google.com/blog/topics/developers-practitioners/how-create-public-cloud-run-services-when-domain-restricted-sharing-enforced"
+        expression  = "resource.matchTagId('${data.google_tags_tag_key.all_users_ingress.id}', '${data.google_tags_tag_value.all_users_ingress.id}')"
       }
     }
   }

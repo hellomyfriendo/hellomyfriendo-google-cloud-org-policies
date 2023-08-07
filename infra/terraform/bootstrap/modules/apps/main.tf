@@ -3,6 +3,7 @@ locals {
 
   cloudbuild_sa_org_roles = [
     "roles/orgpolicy.policyAdmin",
+    "roles/resourcemanager.tagAdmin"
   ]
 }
 
