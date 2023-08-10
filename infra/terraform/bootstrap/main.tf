@@ -8,11 +8,21 @@ provider "google-beta" {
   region  = var.region
 }
 
-module "project" {
-  source = "./modules/project"
+module "enable_apis" {
+  source = "./modules/enable_apis"
+}
 
-  project_id = var.project_id
-  region     = var.region
+module "kms" {
+  source = "./modules/kms"
+
+  region = var.region
+}
+
+module "iam" {
+  source = "./modules/iam"
+
+  terraform_tfvars_secret_kms_crypto_key = module.kms.terraform_tfvars_secret_kms_crypto_key
+  tfstate_bucket_kms_crypto_key          = module.kms.tfstate_bucket_kms_crypto_key
 }
 
 module "apps" {
@@ -23,23 +33,6 @@ module "apps" {
   allowed_policy_member_domains = var.allowed_policy_member_domains
   sourcerepo_name               = var.sourcerepo_name
   branch_name                   = var.branch_name
-  tfstate_bucket                = module.project.tfstate_bucket
+  tfstate_bucket                = google_storage_bucket.tfstate.name
 }
 
-# tfvars secret
-resource "google_secret_manager_secret" "tfvars" {
-  secret_id = "terraform-tfvars-bootstrap"
-
-  replication {
-    user_managed {
-      replicas {
-        location = var.region
-      }
-    }
-  }
-}
-
-resource "google_secret_manager_secret_version" "tfvars" {
-  secret      = google_secret_manager_secret.tfvars.id
-  secret_data = file("${path.module}/terraform.tfvars")
-}
