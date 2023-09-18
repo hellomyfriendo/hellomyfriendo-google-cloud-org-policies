@@ -73,6 +73,17 @@ resource "google_org_policy_policy" "commerceorggovernance_disablePublicMarketpl
   }
 }
 
+resource "google_org_policy_policy" "compute_disableAllIpv6" {
+  name   = "${local.org_policy_name_prefix}/compute.disableAllIpv6"
+  parent = local.org_policy_parent
+
+  spec {
+    rules {
+      enforce = "TRUE"
+    }
+  }
+}
+
 resource "google_org_policy_policy" "compute_disableGuestAttributesAccess" {
   name   = "${local.org_policy_name_prefix}/compute.disableGuestAttributesAccess"
   parent = local.org_policy_parent
