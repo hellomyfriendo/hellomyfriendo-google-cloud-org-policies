@@ -8,7 +8,8 @@ resource "google_compute_firewall_policy_rule" "block_all_egress" {
   firewall_policy = google_compute_firewall_policy.default.name
   description     = "Block all egress traffic"
   priority        = 2100000000
-  enable_logging  = true
+  # TODO(Marcus): Enable when I can pay for it
+  # enable_logging  = true
   action          = "deny"
   direction       = "EGRESS"
   disabled        = false
@@ -29,7 +30,8 @@ resource "google_compute_firewall_policy_rule" "block_all_ingress" {
   firewall_policy = google_compute_firewall_policy.default.name
   description     = "Block all ingress traffic"
   priority        = 2099999999
-  enable_logging  = true
+  # TODO(Marcus): Enable when I can pay for it
+  # enable_logging  = true
   action          = "deny"
   direction       = "INGRESS"
   disabled        = false
@@ -50,7 +52,8 @@ resource "google_compute_firewall_policy_rule" "iap_for_tcp_forwarding_ingress" 
   firewall_policy = google_compute_firewall_policy.default.name
   description     = "Identity-Aware Proxy (IAP) for TCP forwardin."
   priority        = 2099999998
-  enable_logging  = true
+  # TODO(Marcus): Enable when I can pay for it
+  # enable_logging  = true
   action          = "allow"
   direction       = "INGRESS"
   disabled        = false
@@ -69,7 +72,8 @@ resource "google_compute_firewall_policy_rule" "cloud_load_balancing_health_chec
   firewall_policy = google_compute_firewall_policy.default.name
   description     = "Health checks for Cloud Load Balancing"
   priority        = 2099999997
-  enable_logging  = true
+  # TODO(Marcus): Enable when I can pay for it
+  # enable_logging  = true
   action          = "allow"
   direction       = "INGRESS"
   disabled        = false
@@ -89,7 +93,8 @@ resource "google_compute_firewall_policy_rule" "network_cloud_load_balancing_hea
   firewall_policy = google_compute_firewall_policy.default.name
   description     = "Health checks for Network Cloud Load Balancing"
   priority        = 2099999996
-  enable_logging  = true
+  # TODO(Marcus): Enable when I can pay for it
+  # enable_logging  = true
   action          = "allow"
   direction       = "INGRESS"
   disabled        = false
