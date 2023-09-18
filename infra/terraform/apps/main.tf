@@ -22,8 +22,13 @@ module "org_policies" {
   source = "./modules/org_policies"
 
   org_id                        = var.org_id
-  project_id                    = var.project_id
   allowed_policy_member_domains = local.allowed_policy_member_domains_list
   all_users_ingress_tag_key     = module.tags.all_users_ingress_tag_key
   all_users_ingress_tag_value   = module.tags.all_users_ingress_tag_value
+}
+
+module "firewall_policies" {
+  source = "./modules/firewall_policies"
+
+  org_id = var.org_id
 }

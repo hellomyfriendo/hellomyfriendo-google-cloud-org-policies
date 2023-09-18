@@ -1,15 +1,14 @@
-resource "random_pet" "tfstate_bucket" {
-  length = 4
+resource "random_uuid" "tfstate_bucket" {
 }
 
 resource "google_storage_bucket" "tfstate" {
-  name     = random_pet.tfstate_bucket.id
+  name     = random_uuid.tfstate_bucket.result
   location = var.region
 
   uniform_bucket_level_access = true
 
   encryption {
-    default_kms_key_name = module.kms.tfstate_bucket_kms_crypto_key
+    default_kms_key_name = module.kms.confidential_kms_crypto_key
   }
 
   versioning {

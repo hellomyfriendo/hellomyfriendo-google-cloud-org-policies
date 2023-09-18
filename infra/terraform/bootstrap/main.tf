@@ -21,8 +21,8 @@ module "kms" {
 module "iam" {
   source = "./modules/iam"
 
-  terraform_tfvars_secret_kms_crypto_key = module.kms.terraform_tfvars_secret_kms_crypto_key
-  tfstate_bucket_kms_crypto_key          = module.kms.tfstate_bucket_kms_crypto_key
+  org_id                      = var.org_id
+  confidential_kms_crypto_key = module.kms.confidential_kms_crypto_key
 }
 
 module "apps" {
