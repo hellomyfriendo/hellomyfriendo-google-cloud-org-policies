@@ -165,6 +165,17 @@ resource "google_org_policy_policy" "compute_restrictNonConfidentialComputing" {
   }
 }
 
+resource "google_org_policy_policy" "compute_restrictXpnProjectLienRemoval" {
+  name   = "${local.org_policy_name_prefix}/compute.restrictXpnProjectLienRemoval"
+  parent = local.org_policy_parent
+
+  spec {
+    rules {
+      enforce = "TRUE"
+    }
+  }
+}
+
 resource "google_org_policy_policy" "compute_skipDefaultNetworkCreation" {
   name   = "${local.org_policy_name_prefix}/compute.skipDefaultNetworkCreation"
   parent = local.org_policy_parent
