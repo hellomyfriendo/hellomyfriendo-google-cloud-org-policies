@@ -139,21 +139,20 @@ resource "google_org_policy_policy" "compute_requireShieldedVm" {
   }
 }
 
-# TODO(Marcus): Enable this when I can pay for it
-# resource "google_org_policy_policy" "compute_requireVpcFlowLogs" {
-#   name   = "${local.org_policy_name_prefix}/compute.requireVpcFlowLogs"
-#   parent = local.org_policy_parent
+resource "google_org_policy_policy" "compute_requireVpcFlowLogs" {
+  name   = "${local.org_policy_name_prefix}/compute.requireVpcFlowLogs"
+  parent = local.org_policy_parent
 
-#   spec {
-#     rules {
-#       values {
-#         allowed_values = [
-#           "COMPREHENSIVE"
-#         ]
-#       }
-#     }
-#   }
-# }
+  spec {
+    rules {
+      values {
+        allowed_values = [
+          "COMPREHENSIVE"
+        ]
+      }
+    }
+  }
+}
 
 resource "google_org_policy_policy" "compute_restrictNonConfidentialComputing" {
   name   = "${local.org_policy_name_prefix}/compute.restrictNonConfidentialComputing"
