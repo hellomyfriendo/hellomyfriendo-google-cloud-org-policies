@@ -4,6 +4,12 @@ resource "google_compute_firewall_policy" "default" {
   description = "Default Organization Hierarchical Firewall Policy. See https://cloud.google.com/architecture/landing-zones/implement-network-design#configure_hierarchical_firewall_policies."
 }
 
+resource "google_compute_firewall_policy_association" "default" {
+  firewall_policy   = google_compute_firewall_policy.default.id
+  attachment_target = "organizations/${var.org_id}"
+  name              = "default-firewall-policy-organization-association"
+}
+
 resource "google_compute_firewall_policy_rule" "block_all_egress" {
   firewall_policy = google_compute_firewall_policy.default.name
   description     = "Block all egress traffic"
@@ -48,7 +54,7 @@ resource "google_compute_firewall_policy_rule" "block_all_ingress" {
 
 resource "google_compute_firewall_policy_rule" "iap_for_tcp_forwarding_ingress" {
   firewall_policy = google_compute_firewall_policy.default.name
-  description     = "Identity-Aware Proxy (IAP) for TCP forwardin."
+  description     = "Identity-Aware Proxy (IAP) for TCP forwarding."
   priority        = 2099999998
   enable_logging  = true
   action          = "allow"
