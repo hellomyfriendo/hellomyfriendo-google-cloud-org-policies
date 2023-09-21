@@ -1,7 +1,6 @@
 locals {
   enable_apis = [
     "cloudbuild.googleapis.com",
-    "cloudkms.googleapis.com",
     "cloudresourcemanager.googleapis.com",
     "compute.googleapis.com",
     "orgpolicy.googleapis.com",

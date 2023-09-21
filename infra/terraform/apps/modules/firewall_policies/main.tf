@@ -16,9 +16,9 @@ resource "google_compute_firewall_policy_rule" "block_all_egress" {
   description     = "Block all egress traffic"
   priority        = 2100000000
   # enable_logging  = true
-  action          = "deny"
-  direction       = "EGRESS"
-  disabled        = false
+  action    = "deny"
+  direction = "EGRESS"
+  disabled  = false
   match {
     layer4_configs {
       ip_protocol = "all"
@@ -37,9 +37,9 @@ resource "google_compute_firewall_policy_rule" "block_all_ingress" {
   description     = "Block all ingress traffic"
   priority        = 2099999999
   # enable_logging  = true
-  action          = "deny"
-  direction       = "INGRESS"
-  disabled        = false
+  action    = "deny"
+  direction = "INGRESS"
+  disabled  = false
   match {
     layer4_configs {
       ip_protocol = "all"
@@ -58,9 +58,9 @@ resource "google_compute_firewall_policy_rule" "iap_for_tcp_forwarding_ingress" 
   description     = "Identity-Aware Proxy (IAP) for TCP forwarding."
   priority        = 2099999998
   # enable_logging  = true
-  action          = "allow"
-  direction       = "INGRESS"
-  disabled        = false
+  action    = "allow"
+  direction = "INGRESS"
+  disabled  = false
   match {
     layer4_configs {
       ip_protocol = "tcp"
@@ -77,9 +77,9 @@ resource "google_compute_firewall_policy_rule" "cloud_load_balancing_health_chec
   description     = "Health checks for Cloud Load Balancing"
   priority        = 2099999997
   # enable_logging  = true
-  action          = "allow"
-  direction       = "INGRESS"
-  disabled        = false
+  action    = "allow"
+  direction = "INGRESS"
+  disabled  = false
   match {
     layer4_configs {
       ip_protocol = "tcp"
@@ -97,9 +97,9 @@ resource "google_compute_firewall_policy_rule" "network_cloud_load_balancing_hea
   description     = "Health checks for Network Cloud Load Balancing"
   priority        = 2099999996
   # enable_logging  = true
-  action          = "allow"
-  direction       = "INGRESS"
-  disabled        = false
+  action    = "allow"
+  direction = "INGRESS"
+  disabled  = false
   match {
     layer4_configs {
       ip_protocol = "tcp"

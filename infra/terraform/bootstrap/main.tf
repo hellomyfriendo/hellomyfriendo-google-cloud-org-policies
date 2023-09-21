@@ -12,17 +12,10 @@ module "enable_apis" {
   source = "./modules/enable_apis"
 }
 
-module "kms" {
-  source = "./modules/kms"
-
-  region = var.region
-}
-
 module "iam" {
   source = "./modules/iam"
 
-  org_id                      = var.org_id
-  confidential_kms_crypto_key = module.kms.confidential_kms_crypto_key
+  org_id = var.org_id
 }
 
 module "apps" {
